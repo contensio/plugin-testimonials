@@ -1,0 +1,25 @@
+{
+    "name": "contensio/plugin-testimonials",
+    "label": "Testimonials",
+    "description": "Collect testimonials via a public submission form or add them manually. Approve or reject each one before it goes live. Embed approved testimonials as a grid or animated carousel.",
+    "author": "Contensio",
+    "author_url": "https://contensio.com",
+    "version": "1.0.0",
+    "provider": "Contensio\\Testimonials\\TestimonialsServiceProvider",
+    "autoload": {
+        "psr-4": {
+            "Contensio\\Testimonials\\": "src/"
+        }
+    },
+    "requires": {
+        "cms": "^2.0"
+    },
+    "menu": {
+        "placement": "tools",
+        "label": "Testimonials",
+        "icon": "bi-chat-quote",
+        "route": "testimonials.index",
+        "permission": "plugins.configure"
+    },
+    "removable": true
+}

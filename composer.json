@@ -1,0 +1,32 @@
+{
+    "name": "contensio/plugin-testimonials",
+    "description": "Testimonials for Contensio — collect, moderate, and display testimonials as a grid or carousel.",
+    "type": "library",
+    "license": "AGPL-3.0-or-later",
+    "keywords": ["contensio", "plugin", "testimonials", "reviews", "social-proof"],
+    "homepage": "https://contensio.com",
+    "authors": [
+        {
+            "name": "Iosif Gabriel Chimilevschi",
+            "homepage": "https://contensio.com",
+            "role": "Creator"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "contensio/contensio": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Contensio\\Testimonials\\": "src/"
+        }
+    },
+    "extra": {
+        "cms": {
+            "type": "plugin",
+            "provider": "Contensio\\Testimonials\\TestimonialsServiceProvider"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
