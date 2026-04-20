@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Testimonials — Contensio plugin.
+ * Testimonials - Contensio plugin.
  * https://contensio.com
  *
  * @copyright   Copyright (c) 2026 Iosif Gabriel Chimilevschi
@@ -15,14 +15,15 @@ use Illuminate\Support\ServiceProvider;
 
 class TestimonialsServiceProvider extends ServiceProvider
 {
+    protected string $ns = 'contensio-testimonials';
+
     public function boot(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'testimonials');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', $this->ns);
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         Hook::add('contensio/admin/settings-cards', function () {
-            return view('testimonials::partials.settings-hub-card')->render();
+            return view($this->ns . '::partials.settings-hub-card')->render();
         });
     }
 }

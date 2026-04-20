@@ -8,7 +8,7 @@
         $pendingCount  = null;
     }
 @endphp
-<a href="{{ route('testimonials.index') }}"
+<a href="{{ route('contensio-testimonials.index') }}"
    class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-ember-400 hover:shadow-sm transition-all group">
     <div class="flex items-start justify-between gap-3">
         <div class="w-10 h-10 rounded-lg bg-ember-500/10 text-ember-600 flex items-center justify-center text-xl shrink-0">

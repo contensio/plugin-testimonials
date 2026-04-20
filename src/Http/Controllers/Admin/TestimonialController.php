@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Testimonials — Contensio plugin.
+ * Testimonials - Contensio plugin.
  * https://contensio.com
  *
  * @copyright   Copyright (c) 2026 Iosif Gabriel Chimilevschi
@@ -33,12 +33,12 @@ class TestimonialController extends Controller
             'rejected' => Testimonial::where('status', Testimonial::STATUS_REJECTED)->count(),
         ];
 
-        return view('testimonials::admin.index', compact('testimonials', 'status', 'counts'));
+        return view('contensio-testimonials::admin.index', compact('testimonials', 'status', 'counts'));
     }
 
     public function create()
     {
-        return view('testimonials::admin.form', ['testimonial' => null]);
+        return view('contensio-testimonials::admin.form', ['testimonial' => null]);
     }
 
     public function store(Request $request)
@@ -48,14 +48,14 @@ class TestimonialController extends Controller
 
         Testimonial::create($data);
 
-        return redirect()->route('testimonials.index')->with('success', 'Testimonial added.');
+        return redirect()->route('contensio-testimonials.index')->with('success', 'Testimonial added.');
     }
 
     public function edit(int $id)
     {
         $testimonial = Testimonial::findOrFail($id);
 
-        return view('testimonials::admin.form', compact('testimonial'));
+        return view('contensio-testimonials::admin.form', compact('testimonial'));
     }
 
     public function update(Request $request, int $id)
@@ -63,7 +63,7 @@ class TestimonialController extends Controller
         $testimonial = Testimonial::findOrFail($id);
         $testimonial->update($this->validated($request));
 
-        return redirect()->route('testimonials.index')->with('success', 'Testimonial updated.');
+        return redirect()->route('contensio-testimonials.index')->with('success', 'Testimonial updated.');
     }
 
     public function approve(int $id)

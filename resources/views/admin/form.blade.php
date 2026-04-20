@@ -6,7 +6,7 @@
 <div class="p-6 max-w-2xl">
 
     <div class="flex items-center gap-3 mb-6">
-        <a href="{{ route('testimonials.index') }}" class="text-gray-400 hover:text-gray-600 transition-colors">
+        <a href="{{ route('contensio-testimonials.index') }}" class="text-gray-400 hover:text-gray-600 transition-colors">
             <i class="bi bi-arrow-left text-lg"></i>
         </a>
         <h1 class="text-2xl font-bold text-gray-900">
@@ -23,7 +23,7 @@
     @endif
 
     <form method="POST"
-          action="{{ $testimonial ? route('testimonials.update', $testimonial->id) : route('testimonials.store') }}"
+          action="{{ $testimonial ? route('contensio-testimonials.update', $testimonial->id) : route('contensio-testimonials.store') }}"
           class="space-y-6">
         @csrf
         @if($testimonial) @method('PUT') @endif
@@ -112,7 +112,7 @@
         </div>
 
         <div class="flex items-center justify-between">
-            <a href="{{ route('testimonials.index') }}" class="text-sm text-gray-500 hover:text-gray-700">Cancel</a>
+            <a href="{{ route('contensio-testimonials.index') }}" class="text-sm text-gray-500 hover:text-gray-700">Cancel</a>
             <button type="submit"
                     class="bg-ember-500 hover:bg-ember-600 text-white font-semibold px-6 py-2.5 rounded-lg transition-colors">
                 {{ $testimonial ? 'Save changes' : 'Add testimonial' }}

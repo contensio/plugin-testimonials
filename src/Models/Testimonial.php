@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Testimonials — Contensio plugin.
+ * Testimonials - Contensio plugin.
  * https://contensio.com
  *
  * @copyright   Copyright (c) 2026 Iosif Gabriel Chimilevschi
@@ -10,33 +10,67 @@
 
 namespace Contensio\Testimonials\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Contensio\Models\PluginEntry;
 
-class Testimonial extends Model
+/**
+ * A testimonial stored in contensio_plugin_entries.
+ *
+ * Column mapping:
+ *   title      → name
+ *   content    → content (testimonial body)
+ *   status     → pending/approved/rejected  (not the default active/inactive)
+ *   data       → { role, company, avatar_url, rating, source, ip_address }
+ */
+class Testimonial extends PluginEntry
 {
-    protected $table = 'testimonials';
-
-    protected $fillable = [
-        'name',
-        'role',
-        'company',
-        'avatar_url',
-        'content',
-        'rating',
-        'status',
-        'source',
-        'ip_address',
-    ];
-
-    protected $casts = [
-        'rating' => 'integer',
-    ];
+    const PLUGIN = 'contensio/plugin-testimonials';
 
     const STATUS_PENDING  = 'pending';
     const STATUS_APPROVED = 'approved';
     const STATUS_REJECTED = 'rejected';
 
-    // ── Scopes ────────────────────────────────────────────────────────────────
+    protected $attributes = [
+        'plugin' => 'contensio/plugin-testimonials',
+        'type'   => 'testimonial',
+        'status' => 'pending',
+    ];
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('testimonials', fn ($q) => $q
+            ->where('plugin', 'contensio/plugin-testimonials')
+            ->where('type', 'testimonial')
+        );
+    }
+
+    /* ── Column mapping ────────────────────────────────────────────────── */
+
+    public function getNameAttribute(): ?string { return $this->title; }
+    public function setNameAttribute(?string $v): void { $this->attributes['title'] = $v; }
+
+    public function getRoleAttribute(): ?string { return $this->data['role'] ?? null; }
+    public function setRoleAttribute(?string $v): void { $this->setDataField('role', $v); }
+
+    public function getCompanyAttribute(): ?string { return $this->data['company'] ?? null; }
+    public function setCompanyAttribute(?string $v): void { $this->setDataField('company', $v); }
+
+    public function getAvatarUrlAttribute(): ?string { return $this->data['avatar_url'] ?? null; }
+    public function setAvatarUrlAttribute(?string $v): void { $this->setDataField('avatar_url', $v); }
+
+    public function getRatingAttribute(): ?int
+    {
+        $v = $this->data['rating'] ?? null;
+        return $v !== null ? (int) $v : null;
+    }
+    public function setRatingAttribute(?int $v): void { $this->setDataField('rating', $v); }
+
+    public function getSourceAttribute(): ?string { return $this->data['source'] ?? null; }
+    public function setSourceAttribute(?string $v): void { $this->setDataField('source', $v); }
+
+    public function getIpAddressAttribute(): ?string { return $this->data['ip_address'] ?? null; }
+    public function setIpAddressAttribute(?string $v): void { $this->setDataField('ip_address', $v); }
+
+    /* ── Scopes ────────────────────────────────────────────────────────── */
 
     public function scopeApproved($query)
     {
@@ -48,32 +82,22 @@ class Testimonial extends Model
         return $query->where('status', self::STATUS_PENDING);
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
+    /* ── Helpers ───────────────────────────────────────────────────────── */
 
-    /**
-     * Display name combining role and company, e.g. "CEO, Acme Corp".
-     */
     public function byline(): string
     {
         return implode(', ', array_filter([$this->role, $this->company]));
     }
 
-    /**
-     * Initials for the avatar fallback (up to 2 characters).
-     */
     public function initials(): string
     {
-        $parts = array_filter(explode(' ', trim($this->name)));
+        $parts = array_filter(explode(' ', trim($this->name ?? '')));
         if (count($parts) >= 2) {
             return strtoupper(mb_substr($parts[0], 0, 1) . mb_substr(end($parts), 0, 1));
         }
-        return strtoupper(mb_substr($this->name, 0, 2));
+        return strtoupper(mb_substr($this->name ?? '', 0, 2));
     }
 
-    /**
-     * Deterministic avatar background colour based on the name.
-     * Returns a Tailwind background + text class pair.
-     */
     public function avatarColor(): string
     {
         $colors = [
@@ -86,7 +110,15 @@ class Testimonial extends Model
             'bg-indigo-100 text-indigo-700',
             'bg-teal-100 text-teal-700',
         ];
-        $index = abs(crc32($this->name)) % count($colors);
-        return $colors[$index];
+        return $colors[abs(crc32($this->name ?? '')) % count($colors)];
+    }
+
+    /* ── Private ───────────────────────────────────────────────────────── */
+
+    private function setDataField(string $key, mixed $value): void
+    {
+        $data       = $this->data ?? [];
+        $data[$key] = $value;
+        $this->attributes['data'] = json_encode($data);
     }
 }

@@ -10,7 +10,7 @@
             <h1 class="text-2xl font-bold text-gray-900">Testimonials</h1>
             <p class="mt-1 text-gray-500">Review and manage submitted testimonials.</p>
         </div>
-        <a href="{{ route('testimonials.create') }}"
+        <a href="{{ route('contensio-testimonials.create') }}"
            class="inline-flex items-center gap-2 bg-ember-500 hover:bg-ember-600 text-white font-semibold text-sm px-4 py-2.5 rounded-lg transition-colors">
             <i class="bi bi-plus-lg"></i>
             Add testimonial
@@ -26,7 +26,7 @@
     {{-- Status tabs --}}
     <div class="flex items-center gap-1 mb-5 border-b border-gray-200">
         @foreach(['all' => 'All', 'pending' => 'Pending', 'approved' => 'Approved', 'rejected' => 'Rejected'] as $tab => $label)
-        <a href="{{ route('testimonials.index', ['status' => $tab]) }}"
+        <a href="{{ route('contensio-testimonials.index', ['status' => $tab]) }}"
            class="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors
                   {{ $status === $tab
                      ? 'border-ember-500 text-ember-600'
@@ -45,7 +45,7 @@
         <p class="text-lg font-medium text-gray-500">No testimonials{{ $status !== 'all' ? ' with this status' : '' }}</p>
         @if($status === 'all')
         <p class="text-sm mt-1 mb-5">Add one manually or embed the submission form in your theme.</p>
-        <a href="{{ route('testimonials.create') }}"
+        <a href="{{ route('contensio-testimonials.create') }}"
            class="inline-flex items-center gap-2 bg-ember-500 hover:bg-ember-600 text-white font-semibold text-sm px-4 py-2 rounded-lg transition-colors">
             <i class="bi bi-plus-lg"></i> Add a testimonial
         </a>
@@ -91,7 +91,7 @@
                             @endfor
                         </span>
                         @else
-                        <span class="text-gray-300">—</span>
+                        <span class="text-gray-300">-</span>
                         @endif
                     </td>
                     <td class="px-5 py-4">
@@ -105,7 +105,7 @@
                     <td class="px-5 py-4">
                         <div class="flex items-center justify-end gap-1">
                             @if($t->status !== 'approved')
-                            <form method="POST" action="{{ route('testimonials.approve', $t->id) }}">
+                            <form method="POST" action="{{ route('contensio-testimonials.approve', $t->id) }}">
                                 @csrf
                                 <button type="submit" title="Approve"
                                         class="text-gray-400 hover:text-green-600 transition-colors p-1">
@@ -114,7 +114,7 @@
                             </form>
                             @endif
                             @if($t->status !== 'rejected')
-                            <form method="POST" action="{{ route('testimonials.reject', $t->id) }}">
+                            <form method="POST" action="{{ route('contensio-testimonials.reject', $t->id) }}">
                                 @csrf
                                 <button type="submit" title="Reject"
                                         class="text-gray-400 hover:text-red-500 transition-colors p-1">
@@ -122,11 +122,11 @@
                                 </button>
                             </form>
                             @endif
-                            <a href="{{ route('testimonials.edit', $t->id) }}"
+                            <a href="{{ route('contensio-testimonials.edit', $t->id) }}"
                                class="text-gray-400 hover:text-ember-600 transition-colors p-1" title="Edit">
                                 <i class="bi bi-pencil text-base"></i>
                             </a>
-                            <form method="POST" action="{{ route('testimonials.destroy', $t->id) }}"
+                            <form method="POST" action="{{ route('contensio-testimonials.destroy', $t->id) }}"
                                   onsubmit="return confirm('Delete this testimonial permanently?')">
                                 @csrf @method('DELETE')
                                 <button type="submit"
@@ -153,15 +153,15 @@
         <div class="space-y-2">
             <div>
                 <p class="text-xs text-gray-500 mb-1">Submission form</p>
-                <code class="block text-xs font-mono bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-600 select-all">@{{ include('testimonials::partials.submit-form') }}</code>
+                <code class="block text-xs font-mono bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-600 select-all">@{{ include('contensio-testimonials::partials.submit-form') }}</code>
             </div>
             <div>
                 <p class="text-xs text-gray-500 mb-1">Grid display</p>
-                <code class="block text-xs font-mono bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-600 select-all">@{{ include('testimonials::partials.testimonials-grid') }}</code>
+                <code class="block text-xs font-mono bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-600 select-all">@{{ include('contensio-testimonials::partials.testimonials-grid') }}</code>
             </div>
             <div>
                 <p class="text-xs text-gray-500 mb-1">Carousel display</p>
-                <code class="block text-xs font-mono bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-600 select-all">@{{ include('testimonials::partials.testimonials-carousel') }}</code>
+                <code class="block text-xs font-mono bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-600 select-all">@{{ include('contensio-testimonials::partials.testimonials-carousel') }}</code>
             </div>
         </div>
     </div>

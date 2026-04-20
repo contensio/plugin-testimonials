@@ -1,4 +1,4 @@
-# Testimonials — Contensio Plugin
+# Testimonials - Contensio Plugin
 
 Collect testimonials via a public submission form or add them manually in the admin. Review and approve each one before it goes live. Display approved testimonials anywhere on your site as a responsive grid or an animated carousel.
 
@@ -6,15 +6,15 @@ Collect testimonials via a public submission form or add them manually in the ad
 
 ## Features
 
-- **Public submission form** — embeddable form with name, role, company, optional star rating, and message
-- **Moderation queue** — all submitted testimonials start as `pending`; admins approve or reject each one
-- **Manual entry** — admins can add testimonials directly without going through the form
-- **Status tabs** — filter by Pending / Approved / Rejected in the admin list
-- **Grid display** — responsive 1, 2, or 3-column grid of testimonial cards
-- **Carousel display** — Alpine.js animated carousel with prev/next arrows, dot indicators, and optional auto-play
-- **Star ratings** — optional 1–5 star rating per testimonial; displayed as filled stars
-- **Initials avatar** — auto-generated coloured avatar circle when no photo URL is provided
-- **Avatar URL** — optionally link a portrait photo per testimonial
+- **Public submission form** - embeddable form with name, role, company, optional star rating, and message
+- **Moderation queue** - all submitted testimonials start as `pending`; admins approve or reject each one
+- **Manual entry** - admins can add testimonials directly without going through the form
+- **Status tabs** - filter by Pending / Approved / Rejected in the admin list
+- **Grid display** - responsive 1, 2, or 3-column grid of testimonial cards
+- **Carousel display** - Alpine.js animated carousel with prev/next arrows, dot indicators, and optional auto-play
+- **Star ratings** - optional 1–5 star rating per testimonial; displayed as filled stars
+- **Initials avatar** - auto-generated coloured avatar circle when no photo URL is provided
+- **Avatar URL** - optionally link a portrait photo per testimonial
 
 ---
 
@@ -25,7 +25,7 @@ Collect testimonials via a public submission form or add them manually in the ad
 3. An admin reviews it in **Tools → Testimonials** and clicks **Approve** or **Reject**.
 4. Approved testimonials appear in the grid/carousel widgets.
 
-Admins can also create testimonials directly from the admin form — useful for importing existing social proof. Manually created testimonials default to `Approved`.
+Admins can also create testimonials directly from the admin form - useful for importing existing social proof. Manually created testimonials default to `Approved`.
 
 ---
 
@@ -106,10 +106,10 @@ Optional parameters:
 Lists all testimonials with status filter tabs. Each row shows the person's name, a preview of the testimonial text, the star rating, status badge, and submission date.
 
 **Actions per row:**
-- **Approve** (✓) — sets status to `approved`
-- **Reject** (✗) — sets status to `rejected`
-- **Edit** — open the edit form
-- **Delete** — permanently delete
+- **Approve** (✓) - sets status to `approved`
+- **Reject** (✗) - sets status to `rejected`
+- **Edit** - open the edit form
+- **Delete** - permanently delete
 
 ### Create / edit form
 
@@ -171,4 +171,4 @@ Creates one table: `testimonials`
 
 ## License
 
-AGPL-3.0-or-later — see [LICENSE](LICENSE).
+AGPL-3.0-or-later - see [LICENSE](LICENSE).

@@ -20,7 +20,7 @@
     </div>
     @endif
 
-    <form method="POST" action="{{ route('testimonials.submit') }}" class="space-y-5"
+    <form method="POST" action="{{ route('contensio-testimonials.submit') }}" class="space-y-5"
           x-data="{ rating: {{ old('rating', 0) }} }">
         @csrf
 

@@ -1,6 +1,6 @@
 {
     "name": "contensio/plugin-testimonials",
-    "description": "Testimonials for Contensio — collect, moderate, and display testimonials as a grid or carousel.",
+    "description": "Testimonials for Contensio - collect, moderate, and display testimonials as a grid or carousel.",
     "type": "library",
     "license": "AGPL-3.0-or-later",
     "keywords": ["contensio", "plugin", "testimonials", "reviews", "social-proof"],
